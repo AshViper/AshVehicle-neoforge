@@ -68,7 +68,7 @@ The compiled `.jar` will be in `build/libs/`
 
 Xsynth [@Xsynth](https://github.com/Xsynthf)
 
-neoforge-1.21.1 [@github](https://github.com/AshViper/AshVehicle-neoforge)
+neoforge-1.21.1 [@AshVehicle-neoforge](https://github.com/AshViper/AshVehicle-neoforge)
 
 ## 📄 License
 
