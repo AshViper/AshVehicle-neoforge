@@ -1,0 +1,32 @@
+package Aru.Aru.ashvehicle.client.model.vehicle;
+
+import Aru.Aru.ashvehicle.entity.vehicle.*;
+import Aru.Aru.ashvehicle.client.model.VehicleModel;
+import net.minecraft.resources.ResourceLocation;
+import org.jetbrains.annotations.Nullable;
+
+public class RubberBoatModel extends VehicleModel<RubberBoatEntity> {
+    public RubberBoatModel() {
+    }
+
+    @Nullable
+    @Override
+    public VehicleModel.TransformContext<RubberBoatEntity> collectTransform(String boneName) {
+        return null;
+    }
+
+    @Override
+    public ResourceLocation getModelResource(RubberBoatEntity object) {
+        return ResourceLocation.fromNamespaceAndPath("ashvehicle", "geo/rubber_boat.geo.json");
+    }
+
+    @Override
+    public ResourceLocation getTextureResource(RubberBoatEntity object) {
+        return ResourceLocation.fromNamespaceAndPath("ashvehicle", "textures/entity/rubber_boat.png");
+    }
+
+    @Override
+    public ResourceLocation getAnimationResource(RubberBoatEntity animatable) {
+        return ResourceLocation.fromNamespaceAndPath("ashvehicle", "animations/rubber_boat.animation.json");
+    }
+}

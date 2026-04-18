@@ -1,0 +1,14 @@
+{
+    "type":  "superbwarfare:vehicle_assembling",
+    "category":  "misc",
+    "inputs":
+    [
+      "32 superbwarfare:steel_ingot",
+      "4 superbwarfare:cemented_carbide_block",
+      "5 superbwarfare:grain",
+      "superbwarfare:fusee",
+      "8 minecraft:tnt",
+      "minecraft:nether_star"
+    ],
+    "result":{"item":"ashvehicle:nuclearbombitem"}
+}

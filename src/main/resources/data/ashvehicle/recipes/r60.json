@@ -1,0 +1,12 @@
+{
+    "type":  "superbwarfare:vehicle_assembling",
+    "category":  "misc",
+    "inputs":
+    [
+      "2 superbwarfare:steel_ingot",
+      "superbwarfare:seeker",
+      "1 superbwarfare:grain",
+      "superbwarfare:missile_engine"
+    ],
+    "result":{"item":"ashvehicle:r60item"}
+}

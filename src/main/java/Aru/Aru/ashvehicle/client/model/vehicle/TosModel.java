@@ -1,0 +1,54 @@
+package Aru.Aru.ashvehicle.client.model.vehicle;
+
+import Aru.Aru.ashvehicle.client.model.VehicleModel;
+import net.minecraft.resources.ResourceLocation;
+import Aru.Aru.ashvehicle.entity.vehicle.TosEntity;
+import net.minecraft.util.Mth;
+import org.jetbrains.annotations.Nullable;
+
+public class TosModel extends VehicleModel<TosEntity> {
+    public TosModel() {
+    }
+
+    @Nullable
+    public VehicleModel.TransformContext<TosEntity> collectTransform(String boneName) {
+        TransformContext var1000;
+        switch (boneName){
+            case "Turret" :
+                var1000 = (bone, vehicle, state) -> bone.setRotY(this.turretYRot * ((float)Math.PI / 180F));
+                break;
+            case "guns":
+                float a = this.turretYaw;
+                float r = (Mth.abs(a) - 90.0F) / 90.0F;
+                float r2;
+                if (Mth.abs(a) <= 90.0F) {
+                    r2 = a / 90.0F;
+                } else if (a < 0.0F) {
+                    r2 = -(180.0F + a) / 90.0F;
+                } else {
+                    r2 = (180.0F - a) / 90.0F;
+                }
+                var1000 = (bone, vehicle, state) -> bone.setRotX(Mth.clamp(-this.turretXRot - r * this.pitch - r2 * this.roll, vehicle.getTurretMinPitch(), vehicle.getTurretMaxPitch()) * ((float)Math.PI / 180F));
+                break;
+            default :
+                var1000 = null;
+                break;
+        }
+        return var1000;
+    }
+
+    @Override
+    public ResourceLocation getModelResource(TosEntity object) {
+        return ResourceLocation.fromNamespaceAndPath("ashvehicle", "geo/tos.geo.json");
+    }
+
+    @Override
+    public ResourceLocation getTextureResource(TosEntity object) {
+        return ResourceLocation.fromNamespaceAndPath("ashvehicle", "textures/entity/tos.png");
+    }
+
+    @Override
+    public ResourceLocation getAnimationResource(TosEntity animatable) {
+        return ResourceLocation.fromNamespaceAndPath("ashvehicle", "animations/tos.animation.json");
+    }
+}

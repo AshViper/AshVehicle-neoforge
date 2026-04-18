@@ -1,0 +1,12 @@
+package Aru.Aru.ashvehicle.entity.vehicle;
+
+import Aru.Aru.ashvehicle.entity.vehicle.base.RemoteDroneEntity;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.level.Level;
+
+public class ReaperEntity extends RemoteDroneEntity {
+    
+    public ReaperEntity(EntityType<?> pEntityType, Level pLevel) {
+        super(pEntityType, pLevel);
+    }
+}

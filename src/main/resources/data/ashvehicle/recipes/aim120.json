@@ -1,0 +1,12 @@
+{
+    "type":  "superbwarfare:vehicle_assembling",
+    "category":  "misc",
+    "inputs":
+    [
+      "4 superbwarfare:steel_ingot",
+      "superbwarfare:seeker",
+      "superbwarfare:missile_engine",
+      "2 minecraft:tnt"
+    ],
+    "result":{"item":"ashvehicle:aim120item"}
+}

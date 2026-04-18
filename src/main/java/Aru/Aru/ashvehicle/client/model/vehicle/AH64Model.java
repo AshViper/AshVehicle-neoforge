@@ -1,0 +1,59 @@
+package Aru.Aru.ashvehicle.client.model.vehicle;
+
+import Aru.Aru.ashvehicle.client.model.VehicleModel;
+import net.minecraft.resources.ResourceLocation;
+import Aru.Aru.ashvehicle.entity.vehicle.AH64Entity;
+import net.minecraft.util.Mth;
+import org.jetbrains.annotations.Nullable;
+
+public class AH64Model extends VehicleModel<AH64Entity> {
+    public AH64Model() {
+    }
+
+    @Nullable
+    public VehicleModel.TransformContext<AH64Entity> collectTransform(String boneName) {
+        TransformContext var1000;
+        switch (boneName){
+            case "propeller":
+                var1000 = (bone, vehicle, state) -> bone.setRotY(Mth.lerp(state.getPartialTick(), vehicle.propellerRotO, vehicle.getPropellerRot()));
+                break;
+            case "bone8":
+                var1000 = (bone, vehicle, state) -> bone.setRotX(Mth.lerp(state.getPartialTick(), vehicle.propellerRotO, vehicle.getPropellerRot()));
+                break;
+            case "bone", "cameraX":
+                var1000 = (bone, vehicle, state) -> bone.setRotY(this.turretYRot * ((float)Math.PI / 180F));
+                break;
+            case "bone12", "cameraY":
+                float a = this.turretYaw;
+                float r = (Mth.abs(a) - 90.0F) / 90.0F;
+                float r2;
+                if (Mth.abs(a) <= 90.0F) {
+                    r2 = a / 90.0F;
+                } else if (a < 0.0F) {
+                    r2 = -(180.0F + a) / 90.0F;
+                } else {
+                    r2 = (180.0F - a) / 90.0F;
+                }
+                var1000 = (bone, vehicle, state) -> bone.setRotX(Mth.clamp(-this.turretXRot - r * this.pitch - r2 * this.roll, vehicle.getTurretMinPitch(), vehicle.getTurretMaxPitch()) * ((float)Math.PI / 180F));
+                break;
+            default :
+                var1000 = null;
+                break;
+        }
+        return var1000;
+    }
+    @Override
+    public ResourceLocation getModelResource(AH64Entity object) {
+        return ResourceLocation.fromNamespaceAndPath("ashvehicle", "geo/ah-64.geo.json");
+    }
+
+    @Override
+    public ResourceLocation getTextureResource(AH64Entity object) {
+        return ResourceLocation.fromNamespaceAndPath("ashvehicle", "textures/entity/ah-64.png");
+    }
+
+    @Override
+    public ResourceLocation getAnimationResource(AH64Entity animatable) {
+        return ResourceLocation.fromNamespaceAndPath("ashvehicle", "animations/ah-64.animation.json");
+    }
+}

@@ -1,0 +1,264 @@
+package Aru.Aru.ashvehicle.entity.projectile;
+
+import com.atsuishio.superbwarfare.Mod;
+import com.atsuishio.superbwarfare.config.server.ExplosionConfig;
+import com.atsuishio.superbwarfare.entity.projectile.MissileProjectile;
+import com.atsuishio.superbwarfare.entity.vehicle.base.VehicleEntity;
+import com.atsuishio.superbwarfare.init.ModDamageTypes;
+import com.atsuishio.superbwarfare.init.ModItems;
+import com.atsuishio.superbwarfare.init.ModSounds;
+import com.atsuishio.superbwarfare.init.ModTags;
+import com.atsuishio.superbwarfare.network.message.receive.ClientIndicatorMessage;
+import com.atsuishio.superbwarfare.tools.*;
+import net.minecraft.core.BlockPos;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.Mth;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.animal.Pig;
+import net.minecraft.world.entity.boss.enderdragon.EnderDragon;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.EntityHitResult;
+import net.minecraft.world.phys.Vec3;
+import net.neoforged.neoforge.network.PacketDistributor;
+import org.jetbrains.annotations.NotNull;
+import software.bernie.geckolib.animatable.GeoEntity;
+import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
+import software.bernie.geckolib.animation.AnimatableManager;
+import software.bernie.geckolib.util.GeckoLibUtil;
+
+public class Agm158Entity extends MissileProjectile implements GeoEntity {
+    private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
+
+    private enum Phase { DROP, CRUISE, HOMING }
+    private Phase phase = Phase.DROP;
+
+    private int dropTicks = 20; // 0.5Р·В§вЂ™
+
+    public Agm158Entity(EntityType<? extends Agm158Entity> type, Level level) {
+        super(type, level);
+        this.noCulling = true;
+        this.damage = 1100.0F;
+        this.explosionDamage = 180.0F;
+        this.explosionRadius = 12.0F;
+        this.distracted = false;
+        this.durability = 25;
+    }
+
+    protected @NotNull Item getDefaultItem() {
+        return (Item)ModItems.LARGE_ANTI_GROUND_MISSILE.get();
+    }
+
+    protected void onHitEntity(@NotNull EntityHitResult result) {
+        super.onHitEntity(result);
+        Entity entity = result.getEntity();
+        if (entity != this.getOwner() && (this.getOwner() == null || entity != this.getOwner().getVehicle())) {
+            if (this.level() instanceof ServerLevel) {
+                Entity player = this.getOwner();
+                if (player instanceof LivingEntity) {
+                    LivingEntity living = (LivingEntity)player;
+                    if (!living.level().isClientSide() && living instanceof ServerPlayer) {
+                        ServerPlayer player1 = (ServerPlayer)living;
+                        living.level().playSound((Player)null, living.blockPosition(), (SoundEvent)ModSounds.INDICATION.get(), SoundSource.VOICE, 1.0F, 1.0F);
+                        PacketDistributor.sendToPlayer(player1, new ClientIndicatorMessage(0, 5));
+                    }
+                }
+
+                DamageHandler.doDamage(entity, ModDamageTypes.causeProjectileHitDamage(this.level().registryAccess(), this, this.getOwner()), this.damage);
+                if (entity instanceof LivingEntity) {
+                    entity.invulnerableTime = 0;
+                }
+
+                this.causeExplode(result.getLocation());
+                this.discard();
+            }
+
+        }
+    }
+
+    public void onHitBlock(@NotNull BlockHitResult blockHitResult) {
+        super.onHitBlock(blockHitResult);
+        if (this.level() instanceof ServerLevel) {
+            BlockPos resultPos = blockHitResult.getBlockPos();
+            float hardness = this.level().getBlockState(resultPos).getBlock().defaultDestroyTime();
+            if (hardness != -1.0F) {
+                if ((Boolean)ExplosionConfig.EXPLOSION_DESTROY.get()) {
+                    if (this.firstHit) {
+                        this.causeExplode(blockHitResult.getLocation());
+                        this.firstHit = false;
+                        Mod.queueServerWork(3, this::discard);
+                    }
+
+                    if ((Boolean)ExplosionConfig.EXTRA_EXPLOSION_EFFECT.get()) {
+                        this.level().destroyBlock(resultPos, true);
+                    }
+                }
+            } else {
+                this.causeExplode(blockHitResult.getLocation());
+                this.discard();
+            }
+
+            if (!(Boolean)ExplosionConfig.EXPLOSION_DESTROY.get()) {
+                this.causeExplode(blockHitResult.getLocation());
+                this.discard();
+            }
+        }
+
+    }
+
+    public void tick() {
+        super.tick();
+        this.mediumTrail();
+        Entity entity = EntityFindUtil.findEntity(this.level(), (String)this.entityData.get(TARGET_UUID));
+
+        // РіС“вЂЎРівЂљС–РівЂљВ¤РµвЂЎВ¦Р·С’вЂ РїСв‚¬РµвЂ¦С“РівЂљС–РіС“СРіС“вЂ°РіРѓСњРіРѓВ®РіРѓС•РіРѓС•РїСвЂ°
+        for(Entity e : SeekTool.seekLivingEntities(this, 32.0F, 90.0F)) {
+            if (e.getType().is(ModTags.EntityTypes.DECOY) && !this.distracted) {
+                this.entityData.set(TARGET_UUID, e.getStringUUID());
+                this.distracted = true;
+                break;
+            }
+        }
+
+        //===========================
+        //     РІвЂ”вЂ  РіС“вЂўРівЂљВ§РіС“СРівЂљС”Рµв‚¬В¶РµС•РЋ РІвЂ”вЂ 
+        //===========================
+        if (entity != null && !this.entityData.get(TARGET_UUID).equals("none")) {
+
+            double dist = this.distanceTo(entity);
+
+            switch (phase) {
+
+                // ----------------------------------
+                // РІвЂВ  0.5Р·В§вЂ™РіРѓВ РіРѓвЂРёС’Р…РґС‘вЂ№
+                // ----------------------------------
+                case DROP -> {
+                    this.setDeltaMovement(0, -1.1, 0); // РёС’Р…РґС‘вЂ№Р№Р‚СџРµС”В¦
+
+                    dropTicks--;
+                    if (dropTicks <= 0) {
+                        phase = Phase.CRUISE;
+                    }
+                }
+
+                // ----------------------------------
+                // РІвЂРЋ Р¶В°Т‘Рµв„–С–РµВ·РЋРёв‚¬Р„
+                // ----------------------------------
+                case CRUISE -> {
+
+                    // 50mРґВ»ТђРµвЂ вЂ¦РіРѓР„РівЂљвЂ°РёР„ВРµВ°Р‹РіС“вЂўРівЂљВ§РіС“СРівЂљС”РіРѓС‘
+                    if (dist < 200) {
+                        phase = Phase.HOMING;
+                        break;
+                    }
+
+                    // РівЂљС—РіС“СРівЂљР†РіС“С“РіС“в‚¬Р¶вЂ“в„–РµС’вЂРіРѓС‘Р¶В°Т‘Рµв„–С–Р·В§В»РµвЂ№вЂўРїСв‚¬Р№В«ВРµС”В¦РµвЂєС”РµВ®С™РїСвЂ°
+                    Vec3 horizontalTarget = new Vec3(
+                            entity.getX(),
+                            this.getY(),     // Р№В«ВРµС”В¦РµвЂєС”РµВ®С™РїССњР¶В°Т‘Рµв„–С–Р№Р€вЂєРёРЋРЉ
+                            entity.getZ()
+                    );
+
+                    Vec3 toVec = horizontalTarget.subtract(this.position()).normalize();
+
+                    this.turn(toVec, 6.0F);             // Р·В·В©РівЂљвЂћРіРѓвЂ№РіРѓР„Р¶вЂ”вЂ№РµвЂєС›
+                    this.setDeltaMovement(
+                            this.getDeltaMovement().scale(0.05)
+                                    .add(this.getLookAngle().scale(8.0F))
+                    ); // РµВ·РЋРёв‚¬Р„Р№Р‚СџРµС”В¦
+                }
+
+                // ----------------------------------
+                // РІвЂСћ РµвЂ¦С“РіРѓВ®РёР„ВРµВ°Р‹Р¶вЂ“в„–РµСРЏРїСв‚¬HOMINGРїСвЂ°
+                // ----------------------------------
+                case HOMING -> {
+
+                    if ((!entity.getPassengers().isEmpty() || entity instanceof VehicleEntity)
+                            && entity.tickCount % (int)Math.max(0.04 * dist, 2.0F) == 0) {
+                        entity.level().playSound(null, entity.getOnPos(),
+                                entity instanceof Pig ? SoundEvents.PIG_HURT : ModSounds.MISSILE_WARNING.get(),
+                                SoundSource.PLAYERS, 2.0F, 1.0F);
+                    }
+
+                    Vec3 targetPos = new Vec3(
+                            entity.getX(),
+                            entity.getY() + (0.5F * entity.getBbHeight()) + (entity instanceof EnderDragon ? -3 : 0),
+                            entity.getZ()
+                    );
+
+                    Vec3 toVec = RangeTool.calculateFiringSolution(
+                            this.position(),
+                            targetPos,
+                            entity.getDeltaMovement(),
+                            this.getDeltaMovement().length(),
+                            0.0F
+                    );
+
+                    if (this.tickCount > 1) {
+                        this.lostTarget =
+                                VectorTool.calculateAngle(this.getDeltaMovement(), toVec) > 120.0 && !this.lostTarget;
+
+                        if (!this.lostTarget) {
+                            this.turn(toVec, Mth.clamp((float)(this.tickCount - 1) * 0.5F, 0.0F, 15.0F));
+                            this.setDeltaMovement(
+                                    this.getDeltaMovement().scale(0.05)
+                                            .add(this.getLookAngle().scale(8.0F))
+                            );
+                        }
+
+                        if (this.lostTarget) {
+                            this.entityData.set(TARGET_UUID, "none");
+                        }
+                    }
+                }
+            }
+        }
+
+        // РµвЂ¦С“РіРѓВ®РµР‡С—РµвЂР…РіС“В»Р¶В°Т‘Р¶Р†РЋРµвЂЎВ¦Р·С’вЂ 
+        if (this.tickCount > 200 || this.isInWater()) {
+            if (this.level() instanceof ServerLevel) {
+                ProjectileTool.causeCustomExplode(
+                        this,
+                        ModDamageTypes.causeProjectileExplosionDamage(this.level().registryAccess(), this, this.getOwner()),
+                        this,
+                        this.explosionDamage,
+                        this.explosionRadius
+                );
+            }
+
+            this.discard();
+        }
+
+        this.destroyBlock();
+    }
+
+    public double getDefaultGravity() {
+        return this.tickCount < 8 ? 0.15D : super.getDefaultGravity();
+    }
+
+    public void registerControllers(AnimatableManager.ControllerRegistrar data) {}
+
+    public AnimatableInstanceCache getAnimatableInstanceCache() {
+        return this.cache;
+    }
+
+    public @NotNull SoundEvent getSound() {
+        return (SoundEvent)ModSounds.ROCKET_FLY.get();
+    }
+
+    public float getVolume() {
+        return 0.7F;
+    }
+
+    public float getMaxHealth() {
+        return 70.0F;
+    }
+}

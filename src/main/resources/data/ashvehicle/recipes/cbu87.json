@@ -1,0 +1,11 @@
+{
+    "type":  "superbwarfare:vehicle_assembling",
+    "category":  "misc",
+    "inputs":
+    [
+      "2 superbwarfare:steel_ingot",
+      "2 superbwarfare:grain",
+      "superbwarfare:fusee"
+    ],
+    "result":{"item":"ashvehicle:cbu87item"}
+}
