@@ -19,14 +19,14 @@ public class ModTabs {
                     .title(Component.translatable("item_group.ashvehicle.ash-tank"))
                     .icon(() -> new ItemStack(ModItem.ASHVEHICLE_TANK_ICON.get()))
                     .displayItems((param, output) -> {
-                        output.accept(ContainerBlockItem.createInstance((EntityType) ModEntities.T_90.get()));
-                        output.accept(ContainerBlockItem.createInstance((EntityType) ModEntities.GEPARD_1A2.get()));
-                        output.accept(ContainerBlockItem.createInstance((EntityType) ModEntities.M3A3_BRADLEY.get()));
-                        output.accept(ContainerBlockItem.createInstance((EntityType) ModEntities.TOS.get()));
-                        output.accept(ContainerBlockItem.createInstance((EntityType) ModEntities.SAPSAN_GRIM2.get()));
-                        output.accept(ContainerBlockItem.createInstance((EntityType) ModEntities.PANTSIR_S1.get()));
-                        output.accept(ContainerBlockItem.createInstance((EntityType) ModEntities.KV_2.get()));
-                        output.accept(ContainerBlockItem.createInstance((EntityType) ModEntities.M1A1_ABRAMS.get()));
+                        output.accept(ContainerBlockItem.createInstance( ModEntities.T_90.get()));
+                        output.accept(ContainerBlockItem.createInstance( ModEntities.GEPARD_1A2.get()));
+                        output.accept(ContainerBlockItem.createInstance( ModEntities.M3A3_BRADLEY.get()));
+                        output.accept(ContainerBlockItem.createInstance( ModEntities.TOS.get()));
+                        output.accept(ContainerBlockItem.createInstance( ModEntities.SAPSAN_GRIM2.get()));
+                        output.accept(ContainerBlockItem.createInstance( ModEntities.PANTSIR_S1.get()));
+                        output.accept(ContainerBlockItem.createInstance( ModEntities.KV_2.get()));
+                        output.accept(ContainerBlockItem.createInstance( ModEntities.M1A1_ABRAMS.get()));
                     })
                     .build()
     );
@@ -46,35 +46,35 @@ public class ModTabs {
                     .title(Component.translatable("item_group.ashvehicle.ash-air"))
                     .icon(() -> new ItemStack(ModItem.ASHVEHICLE_AIR_ICON.get()))
                     .displayItems((param, output) -> {
-                        output.accept(ContainerBlockItem.createInstance((EntityType) ModEntities.UH_60.get()));
-                        output.accept(ContainerBlockItem.createInstance((EntityType) ModEntities.MH_60M.get()));
-                        output.accept(ContainerBlockItem.createInstance((EntityType) ModEntities.MIG_29.get()));
-                        output.accept(ContainerBlockItem.createInstance((EntityType) ModEntities.F_4.get()));
-                        output.accept(ContainerBlockItem.createInstance((EntityType) ModEntities.F_14.get()));
-                        output.accept(ContainerBlockItem.createInstance((EntityType) ModEntities.F_16.get()));
-                        output.accept(ContainerBlockItem.createInstance((EntityType) ModEntities.F_15.get()));
-                        output.accept(ContainerBlockItem.createInstance((EntityType) ModEntities.SU_33.get()));
-                        output.accept(ContainerBlockItem.createInstance((EntityType) ModEntities.SU_25.get()));
-                        output.accept(ContainerBlockItem.createInstance((EntityType) ModEntities.F_39E.get()));
-                        output.accept(ContainerBlockItem.createInstance((EntityType) ModEntities.SU_34.get()));
-                        output.accept(ContainerBlockItem.createInstance((EntityType) ModEntities.F_35B.get()));
-                        output.accept(ContainerBlockItem.createInstance((EntityType) ModEntities.F_35A.get()));
-                        output.accept(ContainerBlockItem.createInstance((EntityType) ModEntities.B_2.get()));
-                        output.accept(ContainerBlockItem.createInstance((EntityType) ModEntities.F_22.get()));
-                        output.accept(ContainerBlockItem.createInstance((EntityType) ModEntities.F_18.get()));
-                        output.accept(ContainerBlockItem.createInstance((EntityType) ModEntities.F_117.get()));
-                        output.accept(ContainerBlockItem.createInstance((EntityType) ModEntities.SU_57.get()));
-                        output.accept(ContainerBlockItem.createInstance((EntityType) ModEntities.V_22.get()));
-                        output.accept(ContainerBlockItem.createInstance((EntityType) ModEntities.F_2.get()));
-                        output.accept(ContainerBlockItem.createInstance((EntityType) ModEntities.SU_27.get()));
-                        output.accept(ContainerBlockItem.createInstance((EntityType) ModEntities.J_20.get()));
-                        output.accept(ContainerBlockItem.createInstance((EntityType) ModEntities.EuroFighter.get()));
-                        //output.accept(ContainerBlockItem.createInstance((EntityType) ModEntities.REAPER.get())); need to fix
-                        output.accept(ContainerBlockItem.createInstance((EntityType) ModEntities.YF_23.get()));
-                        //output.accept(ContainerBlockItem.createInstance((EntityType) ModEntities.X_47B.get())); need to fix
-                        output.accept(ContainerBlockItem.createInstance((EntityType) ModEntities.RAH_66.get()));
-                        output.accept(ContainerBlockItem.createInstance((EntityType) ModEntities.AH_64.get()));
-                        output.accept(ContainerBlockItem.createInstance((EntityType) ModEntities.ZELENSKY.get()));
+                        output.accept(ContainerBlockItem.createInstance( ModEntities.UH_60.get()));
+                        output.accept(ContainerBlockItem.createInstance( ModEntities.MH_60M.get()));
+                        output.accept(ContainerBlockItem.createInstance( ModEntities.MIG_29.get()));
+                        output.accept(ContainerBlockItem.createInstance( ModEntities.F_4.get()));
+                        output.accept(ContainerBlockItem.createInstance( ModEntities.F_14.get()));
+                        output.accept(ContainerBlockItem.createInstance( ModEntities.F_16.get()));
+                        output.accept(ContainerBlockItem.createInstance( ModEntities.F_15.get()));
+                        output.accept(ContainerBlockItem.createInstance( ModEntities.SU_33.get()));
+                        output.accept(ContainerBlockItem.createInstance( ModEntities.SU_25.get()));
+                        output.accept(ContainerBlockItem.createInstance( ModEntities.F_39E.get()));
+                        output.accept(ContainerBlockItem.createInstance( ModEntities.SU_34.get()));
+                        output.accept(ContainerBlockItem.createInstance( ModEntities.F_35B.get()));
+                        output.accept(ContainerBlockItem.createInstance( ModEntities.F_35A.get()));
+                        output.accept(ContainerBlockItem.createInstance( ModEntities.B_2.get()));
+                        output.accept(ContainerBlockItem.createInstance( ModEntities.F_22.get()));
+                        output.accept(ContainerBlockItem.createInstance( ModEntities.F_18.get()));
+                        output.accept(ContainerBlockItem.createInstance( ModEntities.F_117.get()));
+                        output.accept(ContainerBlockItem.createInstance( ModEntities.SU_57.get()));
+                        output.accept(ContainerBlockItem.createInstance( ModEntities.V_22.get()));
+                        output.accept(ContainerBlockItem.createInstance( ModEntities.F_2.get()));
+                        output.accept(ContainerBlockItem.createInstance( ModEntities.SU_27.get()));
+                        output.accept(ContainerBlockItem.createInstance( ModEntities.J_20.get()));
+                        output.accept(ContainerBlockItem.createInstance( ModEntities.EuroFighter.get()));
+                        //output.accept(ContainerBlockItem.createInstance( ModEntities.REAPER.get())); need to fix
+                        //output.accept(ContainerBlockItem.createInstance( ModEntities.YF_23.get()));
+                        //output.accept(ContainerBlockItem.createInstance( ModEntities.X_47B.get())); need to fix
+                        output.accept(ContainerBlockItem.createInstance( ModEntities.RAH_66.get()));
+                        output.accept(ContainerBlockItem.createInstance(ModEntities.AH_64.get()));
+                        output.accept(ContainerBlockItem.createInstance(ModEntities.ZELENSKY.get()));
                     })
                     .build()
     );

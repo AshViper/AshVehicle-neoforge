@@ -7,7 +7,7 @@ import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 
-@EventBusSubscriber(modid = "ashvehicle", bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
+@EventBusSubscriber(modid = "ashvehicle", value = Dist.CLIENT)
 public class ModEntityRenderers {
 
     @SubscribeEvent
