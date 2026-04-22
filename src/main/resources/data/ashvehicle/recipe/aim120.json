@@ -1,26 +1,27 @@
 {
   "type": "minecraft:crafting_shaped",
-  "pattern": [
-    " A ",
-    "BCB",
-    " D "
-  ],
+  "category": "misc",
   "key": {
-    "A": {
-      "item": "superbwarfare:seeker"
+    "a": {
+      "item": "minecraft:comparator"
     },
-    "B": {
+    "b": {
       "item": "minecraft:iron_ingot"
     },
-    "C": {
+    "c": {
       "item": "superbwarfare:grain"
     },
-    "D": {
+    "d": {
       "item": "superbwarfare:missile_engine"
     }
   },
+  "pattern": [
+    " a ",
+    "bcb",
+    " d "
+  ],
   "result": {
-    "item": "ashvehicle:aim9item",
+    "id": "ashvehicle:aim120item",
     "count": 2
   }
 }

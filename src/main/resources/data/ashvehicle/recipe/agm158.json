@@ -1,5 +1,6 @@
 {
   "type": "minecraft:crafting_shaped",
+  "category": "misc",
   "pattern": [
     " A ",
     "BCB",
@@ -7,20 +8,20 @@
   ],
   "key": {
     "A": {
-      "item": "superbwarfare:fusee"
+      "item": "minecraft:comparator"
     },
     "B": {
-      "item": "minecraft:iron_ingot"
+      "item": "superbwarfare:steel_ingot"
     },
     "C": {
       "item": "minecraft:tnt"
     },
     "D": {
-      "item": "superbwarfare:grain"
+      "item": "superbwarfare:missile_engine"
     }
   },
   "result": {
-    "item": "ashvehicle:cbu87item",
+    "id": "ashvehicle:agm158item",
     "count": 2
   }
 }

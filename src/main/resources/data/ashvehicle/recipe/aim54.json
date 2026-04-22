@@ -1,16 +1,17 @@
 {
   "type": "minecraft:crafting_shaped",
+  "category": "misc",
   "pattern": [
     " A ",
     "BCB",
-    " D "
+    "BDB"
   ],
   "key": {
     "A": {
-      "item": "minecraft:comparator"
+      "item": "superbwarfare:seeker"
     },
     "B": {
-      "item": "superbwarfare:steel_ingot"
+      "item": "minecraft:iron_ingot"
     },
     "C": {
       "item": "superbwarfare:grain"
@@ -20,7 +21,7 @@
     }
   },
   "result": {
-    "item": "ashvehicle:r60item",
+    "id": "ashvehicle:aim54item",
     "count": 2
   }
 }

@@ -1,5 +1,6 @@
 {
   "type": "minecraft:crafting_shaped",
+  "category": "misc",
   "pattern": [
     " A ",
     "BCB",
@@ -13,14 +14,14 @@
       "item": "minecraft:iron_ingot"
     },
     "C": {
-      "item": "minecraft:tnt"
+      "item": "superbwarfare:grain"
     },
     "D": {
       "item": "superbwarfare:missile_engine"
     }
   },
   "result": {
-    "item": "ashvehicle:agm114item",
+    "id": "ashvehicle:aim9item",
     "count": 2
   }
 }

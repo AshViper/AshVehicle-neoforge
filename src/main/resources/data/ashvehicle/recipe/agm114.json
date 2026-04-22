@@ -1,5 +1,6 @@
 {
   "type": "minecraft:crafting_shaped",
+  "category": "misc",
   "pattern": [
     " A ",
     "BCB",
@@ -7,10 +8,10 @@
   ],
   "key": {
     "A": {
-      "item": "minecraft:comparator"
+      "item": "superbwarfare:seeker"
     },
     "B": {
-      "item": "superbwarfare:steel_ingot"
+      "item": "minecraft:iron_ingot"
     },
     "C": {
       "item": "minecraft:tnt"
@@ -20,7 +21,7 @@
     }
   },
   "result": {
-    "item": "ashvehicle:agm158item",
+    "id": "ashvehicle:agm114item",
     "count": 2
   }
 }
