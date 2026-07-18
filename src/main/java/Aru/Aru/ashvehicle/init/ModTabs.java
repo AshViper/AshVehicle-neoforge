@@ -1,6 +1,6 @@
 package Aru.Aru.ashvehicle.init;
 
-import com.atsuishio.superbwarfare.item.common.container.ContainerBlockItem;
+import com.atsuishio.superbwarfare.item.container.ContainerBlockItem;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.EntityType;
@@ -57,7 +57,6 @@ public class ModTabs {
                         output.accept(ContainerBlockItem.createInstance( ModEntities.SU_25.get()));
                         output.accept(ContainerBlockItem.createInstance( ModEntities.F_39E.get()));
                         output.accept(ContainerBlockItem.createInstance( ModEntities.SU_34.get()));
-                        output.accept(ContainerBlockItem.createInstance( ModEntities.F_35B.get()));
                         output.accept(ContainerBlockItem.createInstance( ModEntities.F_35A.get()));
                         output.accept(ContainerBlockItem.createInstance( ModEntities.B_2.get()));
                         output.accept(ContainerBlockItem.createInstance( ModEntities.F_22.get()));

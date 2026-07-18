@@ -10,29 +10,26 @@ authors = "${mod_authors}"
 logoFile = "AshVehicle.png"
 description = '''${mod_description}'''
 
-[[mixins]]
-config = "ashvehicle.mixins.json"
-
-[[dependencies.${mod_id}]]
+[[dependencies."${mod_id}"]]
 modId = "neoforge"
-type = "required"
+mandatory = true
 versionRange = "[${neo_version},)"
 ordering = "NONE"
 side = "BOTH"
 
-[[dependencies.${mod_id}]]
+[[dependencies."${mod_id}"]]
 modId = "minecraft"
-type = "required"
+mandatory = true
 versionRange = "${minecraft_version_range}"
 ordering = "NONE"
 side = "BOTH"
 
-[[dependencies.${mod_id}]]
+[[dependencies."${mod_id}"]]
 modId = "superbwarfare"
-type = "required"
+mandatory = true
 versionRange = "[0.8.0,)"
 ordering = "NONE"
 side = "BOTH"
 
-[features.${mod_id}]
-javaVersion = "[21,)"
+[[mixins]]
+config="ashvehicle.mixins.json"

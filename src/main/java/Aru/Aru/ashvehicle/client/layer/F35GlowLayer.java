@@ -1,5 +1,6 @@
 package Aru.Aru.ashvehicle.client.layer;
 
+import Aru.Aru.ashvehicle.entity.vehicle.F35AEntity;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -8,17 +9,16 @@ import net.minecraft.resources.ResourceLocation;
 import software.bernie.geckolib.cache.object.BakedGeoModel;
 import software.bernie.geckolib.renderer.GeoRenderer;
 import software.bernie.geckolib.renderer.layer.GeoRenderLayer;
-import Aru.Aru.ashvehicle.entity.vehicle.F35Entity;
 
-public class F35GlowLayer extends GeoRenderLayer<F35Entity> {
+public class F35GlowLayer extends GeoRenderLayer<F35AEntity> {
     private static final ResourceLocation GLOW_TEXTURE = ResourceLocation.fromNamespaceAndPath("ashvehicle", "textures/entity/f-35-glow.png");
 
-    public F35GlowLayer(GeoRenderer<F35Entity> renderer) {
+    public F35GlowLayer(GeoRenderer<F35AEntity> renderer) {
         super(renderer);
     }
 
     @Override
-    public void render(PoseStack poseStack, F35Entity animatable, BakedGeoModel bakedModel,
+    public void render(PoseStack poseStack, F35AEntity animatable, BakedGeoModel bakedModel,
                        RenderType baseRenderType, MultiBufferSource bufferSource, VertexConsumer buffer,
                        float partialTick, int packedLight, int packedOverlay) {
 

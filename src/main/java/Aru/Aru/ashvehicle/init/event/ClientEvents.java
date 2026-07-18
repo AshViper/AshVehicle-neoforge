@@ -61,10 +61,6 @@ public class ClientEvents {
         // Toggle VTOL mode (V key)
         if (ClientKeyMappings.VTOL_TOGGLE != null
                 && ClientKeyMappings.VTOL_TOGGLE.consumeClick()) {
-
-            if (vehicle instanceof F35Entity f35) {
-                f35.toggleVtolMode();
-            }
             if (vehicle instanceof V22Entity v22) {
                 v22.toggleVtolMode();
             }

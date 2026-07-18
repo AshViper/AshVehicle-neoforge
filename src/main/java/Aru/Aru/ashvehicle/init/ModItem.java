@@ -1,6 +1,7 @@
 package Aru.Aru.ashvehicle.init;
 
 import Aru.Aru.ashvehicle.AshVehicle;
+import Aru.Aru.ashvehicle.item.JerryCanItem;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.item.Item;
 import net.neoforged.neoforge.registries.DeferredHolder;
@@ -40,6 +41,8 @@ public final class ModItem {
             () -> new Item(new Item.Properties().stacksTo(2)));
     public static final DeferredHolder<Item, Item> ENGINEFAN = ITEMS.register("enginefanitem",
             () -> new Item(new Item.Properties().stacksTo(8)));
+    public static final DeferredHolder<Item, Item> JERRY_CAN = ITEMS.register("jerry_can",
+            () -> new JerryCanItem(new Item.Properties().stacksTo(1)));
 
     private ModItem() {
     }

@@ -236,12 +236,12 @@ public class TosEntity extends GeoVehicleEntity implements CoordinateTargetVehic
 
     private Vec3 calculateLaunchVector(Vec3 targetPos) {
         Vec3 shootPos = this.getShootPos(ROCKET_WEAPON, 1.0F);
-        return RangeTool.calculateLaunchVector(
+        return RangeTool.calculateFiringSolution(
                 shootPos,
                 targetPos,
+                this.getBarrelVector(1.0F),
                 this.getProjectileVelocity(ROCKET_WEAPON),
-                this.getProjectileGravity(ROCKET_WEAPON),
-                false
+                this.getProjectileGravity(ROCKET_WEAPON)
         );
     }
 

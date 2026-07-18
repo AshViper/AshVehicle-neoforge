@@ -1,0 +1,17 @@
+{
+  "type": "superbwarfare:vehicle_assembling",
+  "category": "aircraft",
+  "inputs": [
+    "2 superbwarfare:large_motor",
+    "1 superbwarfare:medium_battery_pack",
+    "10 superbwarfare:cemented_carbide_block",
+    "2 superbwarfare:light_armament_module",
+    "3 superbwarfare:wheel",
+    "3 minecraft:glass",
+    "2 ashvehicle:enginefanitem",
+    "1 superbwarfare:ancient_cpu"
+  ],
+  "result": {
+    "entity": "ashvehicle:f-22"
+  }
+}

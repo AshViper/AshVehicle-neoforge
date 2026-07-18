@@ -95,7 +95,6 @@ public class ClientEntityHighlighter {
                     ModEntities.MELON_BOMB.get(),
                     ModEntities.MORTAR_SHELL.get(),
                     ModEntities.MORTAR.get(),
-                    ModEntities.LASER.get(),
                     ModEntities.FLARE_DECOY.get(),
                     ModEntities.SMOKE_DECOY.get(),
                     ModEntities.CLAYMORE.get(),
@@ -109,7 +108,6 @@ public class ClientEntityHighlighter {
 
         if (stealthTypes == null) {
             stealthTypes = Set.of(
-                    Aru.Aru.ashvehicle.init.ModEntities.F_35B.get(),
                     Aru.Aru.ashvehicle.init.ModEntities.F_35A.get(),
                     Aru.Aru.ashvehicle.init.ModEntities.B_2.get(),
                     Aru.Aru.ashvehicle.init.ModEntities.F_22.get(),

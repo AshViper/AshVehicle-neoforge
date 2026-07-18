@@ -12,7 +12,7 @@ import Aru.Aru.ashvehicle.init.ModNetwork;
 import Aru.Aru.ashvehicle.tools.DroneFindUtil;
 import Aru.Aru.ashvehicle.util.ItemStackDataUtil;
 import com.atsuishio.superbwarfare.init.ModItems;
-import com.atsuishio.superbwarfare.item.Monitor;
+import com.atsuishio.superbwarfare.item.misc.MonitorItem;
 import com.atsuishio.superbwarfare.tools.TraceTool;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
@@ -29,7 +29,7 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import org.joml.Vector3f;
 
 @OnlyIn(Dist.CLIENT)
-@EventBusSubscriber(modid = AshVehicle.MODID, value = Dist.CLIENT, bus = EventBusSubscriber.Bus.GAME)
+@EventBusSubscriber(modid = AshVehicle.MODID, value = Dist.CLIENT)
 public class DroneControlHandler {
 
     private static boolean lastForward = false;
@@ -66,7 +66,7 @@ public class DroneControlHandler {
         if (!ItemStackDataUtil.getBoolean(stack, "Using")) return null;
         if (!ItemStackDataUtil.getBoolean(stack, "Linked")) return null;
         
-        String droneUUID = ItemStackDataUtil.getString(stack, Monitor.LINKED_DRONE);
+        String droneUUID = ItemStackDataUtil.getString(stack, MonitorItem.LINKED_DRONE);
         return DroneFindUtil.findRemoteDrone(player.level(), droneUUID);
     }
 

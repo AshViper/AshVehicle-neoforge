@@ -13,7 +13,7 @@ import net.neoforged.fml.common.Mod;
 import org.lwjgl.glfw.GLFW;
 
 @OnlyIn(Dist.CLIENT)
-@EventBusSubscriber(modid = AshVehicle.MODID, value = Dist.CLIENT, bus = EventBusSubscriber.Bus.MOD)
+@EventBusSubscriber(modid = AshVehicle.MODID, value = Dist.CLIENT)
 public class ModKeyBindings {
 
     public static final String CATEGORY = "key.categories.ashvehicle";

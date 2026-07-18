@@ -13,6 +13,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.List;
+import java.util.Objects;
 
 @Mixin(VehicleEntity.class)
 public abstract class VehicleEntityMixin {
@@ -31,10 +32,10 @@ public abstract class VehicleEntityMixin {
 
             // 元の回転をコピー（破壊的変更防止）
             Quaterniond rot = new Quaterniond(
-                    this.getRotationFromString(obbInfo.rotation)
+                    this.getRotationFromString(obbInfo.getRotation())
             );
 
-            Vec3 angles = ((OBBInfoAccessor) obbInfo)
+            Vec3 angles = ((OBBInfoAccessor) (Object) obbInfo)
                     .superbwarfare$getRotationAngles();
 
             if (angles != null) {
@@ -45,7 +46,7 @@ public abstract class VehicleEntityMixin {
                 ));
             }
 
-            obb.setRotation(rot);
+            obb.updateRotation(rot);
         }
     }
 }

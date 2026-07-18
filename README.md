@@ -5,8 +5,8 @@
 **Comprehensive military vehicle addon for Superb Warfare**
 
 [![License: GPL-3.0](https://img.shields.io/badge/License-GPL%203.0-orange.svg)](LICENSE)
-[![Minecraft](https://img.shields.io/badge/Minecraft-1.21.1-green.svg)](https://minecraft.net)
-[![NeoForge](https://img.shields.io/badge/NeoForge-1.21.1-blue.svg)](https://neoforged.net/)
+[![Minecraft](https://img.shields.io/badge/Minecraft-1.20.1-green.svg)](https://minecraft.net)
+[![Forge](https://img.shields.io/badge/Forge-47.2.0-blue.svg)](https://files.minecraftforge.net/)
 
 [🌐 Website](https://ashviper.github.io/AshVehicle-site/) • [📥 Download](https://ashviper.github.io/AshVehicle-site/#download) • [💬 Discord](https://discord.gg/dp7XAy3nH3)
 
@@ -16,39 +16,38 @@
 
 ## ✈️ About
 
-AshVehicle is an addon mod for **Superb Warfare** that adds 50+ military vehicles to Minecraft.
+AshVehicle is an addon mod for **[Superb Warfare](https://github.com/Mercurows/SuperbWarfare)** that adds 50+ military vehicles to Minecraft.
 
 ### Vehicles
 
-- Helicopters — UH-60, AH-64, V-22, RAH-66, MH-60M  
-- Fighter Jets — F-22, F-35, Su-57, Eurofighter, J-20, F-15, F-16, F-18, Mig-29  
-- Bombers — B-2 Spirit  
-- Ground Vehicles — T-90, M3A3 Bradley, Pantsir S1, Gepard, Tos-1  
-- Naval — Zumwalt, Rubber Boat  
-- Weapons — AIM-9, AIM-120, Tomahawk, JASSM-XR, AGM-114  
+- **Helicopters** — UH-60, AH-64, V-22, RAH-66, MH-60M
+- **Fighter Jets** — F-22, F-35, Su-57, Eurofighter, J-20, F-15, F-16, F-18, Mig-29
+- **Bombers** — B-2 Spirit
+- **Ground Vehicles** — T-90, M3A3 Bradley, Pantsir S1, Gepard, Tos-1
+- **Naval** — Zumwalt, Rubber Boat
+- **Weapons** — AIM-9, AIM-120, Tomahawk, JASSM-XR, AGM-114
 
 ### Features
 
-- Advanced flight physics  
-- Weapon systems (missiles, bombs, guns)  
-- Regular updates  
-
----
+- Advanced flight physics
+- Comprehensive weapon systems (missiles, bombs, guns)
+- Regular updates
 
 ## 📦 Requirements
 
-- Minecraft **1.21.1**  
-- NeoForge **21.x+**  
-- Superb Warfare  
-- GeckoLib **4.4.6+**  
+- Minecraft **1.21.1**
+- Minecraft Forge **47.2.0+**
+- [Superb Warfare](https://github.com/Mercurows/SuperbWarfare)
+- [GeckoLib](https://geckolib.com/) 4.4.6+
 
----
-
-## 🛠️ Building
+## 🛠️ Building from Source
 
 ```bash
+# Clone repository
 git clone https://github.com/AshViper/AshVehicle.git
 cd AshVehicle
+
+# Build
 ./gradlew build
 ```
 
@@ -68,7 +67,7 @@ The compiled `.jar` will be in `build/libs/`
 
 Xsynth [@Xsynth](https://github.com/Xsynthf)
 
-neoforge-1.21.1 [@AshVehicle-neoforge](https://github.com/AshViper/AshVehicle-neoforge)
+neoforge-1.21.1 [@github](https://github.com/AshViper/AshVehicle-neoforge)
 
 ## 📄 License
 

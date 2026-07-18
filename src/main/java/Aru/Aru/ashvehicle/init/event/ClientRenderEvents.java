@@ -16,8 +16,7 @@ import net.neoforged.fml.common.Mod;
 @OnlyIn(Dist.CLIENT)
 @EventBusSubscriber(
         modid = AshVehicle.MODID,
-        value = Dist.CLIENT,
-        bus = EventBusSubscriber.Bus.GAME
+        value = Dist.CLIENT
 )
 public final class ClientRenderEvents {
 

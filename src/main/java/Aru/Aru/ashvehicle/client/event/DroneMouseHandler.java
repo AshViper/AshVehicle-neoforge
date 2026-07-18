@@ -14,7 +14,7 @@ import net.neoforged.neoforge.client.event.ClientTickEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 
 @OnlyIn(Dist.CLIENT)
-@EventBusSubscriber(modid = AshVehicle.MODID, value = Dist.CLIENT, bus = EventBusSubscriber.Bus.GAME)
+@EventBusSubscriber(modid = AshVehicle.MODID, value = Dist.CLIENT)
 public class DroneMouseHandler {
 
     private static Vec2 posO = new Vec2(0, 0);
@@ -35,7 +35,7 @@ public class DroneMouseHandler {
         if (player == null) return;
 
         posO = posN;
-        posN = MouseMovementHandler.getMousePos();
+        posN = MouseMovementHandler.INSTANCE.getMousePos();
 
         RemoteDroneEntity drone = DroneControlHandler.getControlledDrone(player);
         if (drone == null) return;

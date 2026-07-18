@@ -5,7 +5,7 @@ import Aru.Aru.ashvehicle.entity.vehicle.base.RemoteDroneEntity;
 import Aru.Aru.ashvehicle.tools.DroneFindUtil;
 import Aru.Aru.ashvehicle.util.ItemStackDataUtil;
 import com.atsuishio.superbwarfare.init.ModItems;
-import com.atsuishio.superbwarfare.item.Monitor;
+import com.atsuishio.superbwarfare.item.misc.MonitorItem;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
@@ -47,7 +47,7 @@ public record DroneInputPacket(boolean forward, boolean backward, boolean left, 
                 return;
             }
 
-            String droneUUID = ItemStackDataUtil.getString(stack, Monitor.LINKED_DRONE);
+            String droneUUID = ItemStackDataUtil.getString(stack, MonitorItem.LINKED_DRONE);
             RemoteDroneEntity drone = DroneFindUtil.findRemoteDrone(player.level(), droneUUID);
             if (drone == null) {
                 return;

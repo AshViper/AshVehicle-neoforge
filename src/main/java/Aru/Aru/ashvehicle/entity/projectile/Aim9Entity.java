@@ -11,6 +11,7 @@ import com.atsuishio.superbwarfare.init.ModTags;
 import com.atsuishio.superbwarfare.network.message.receive.ClientIndicatorMessage;
 import com.atsuishio.superbwarfare.tools.*;
 import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.ClipContext;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
@@ -41,11 +42,11 @@ public class Aim9Entity extends MissileProjectile implements GeoEntity {
     public Aim9Entity(EntityType<? extends Aim9Entity> type, Level level) {
         super(type, level);
         this.noCulling = true;
-        this.damage = 1100.0F;
-        this.explosionDamage = 180.0F;
-        this.explosionRadius = 12.0F;
+        this.setDamageValue(1100.0F);
+        this.setExplosionDamageValue(180.0F);
+        this.setExplosionRadiusValue(12.0F);
         this.distracted = false;
-        this.durability = 25;
+        this.setDurability(25);
     }
 
     protected @NotNull Item getDefaultItem() {
@@ -67,7 +68,7 @@ public class Aim9Entity extends MissileProjectile implements GeoEntity {
                     }
                 }
 
-                DamageHandler.doDamage(entity, ModDamageTypes.causeProjectileHitDamage(this.level().registryAccess(), this, this.getOwner()), this.damage);
+                DamageHandler.doDamage(entity, ModDamageTypes.causeProjectileHitDamage(this.level().registryAccess(), this, this.getOwner()), this.getDamageValue());
                 if (entity instanceof LivingEntity) {
                     entity.invulnerableTime = 0;
                 }
@@ -86,9 +87,9 @@ public class Aim9Entity extends MissileProjectile implements GeoEntity {
             float hardness = this.level().getBlockState(resultPos).getBlock().defaultDestroyTime();
             if (hardness != -1.0F) {
                 if ((Boolean)ExplosionConfig.EXPLOSION_DESTROY.get()) {
-                    if (this.firstHit) {
+                    if (this.getFirstHit()) {
                         this.causeExplode(blockHitResult.getLocation());
-                        this.firstHit = false;
+                        this.setFirstHit(false);
                         Mod.queueServerWork(3, this::discard);
                     }
 
@@ -144,13 +145,24 @@ public class Aim9Entity extends MissileProjectile implements GeoEntity {
 
         if (this.tickCount > 200 || this.isInWater()) {
             if (this.level() instanceof ServerLevel) {
-                ProjectileTool.causeCustomExplode(this, ModDamageTypes.causeProjectileExplosionDamage(this.level().registryAccess(), this, this.getOwner()), this, this.explosionDamage, this.explosionRadius);
+                ProjectileTool.causeCustomExplode(this, ModDamageTypes.causeProjectileExplosionDamage(this.level().registryAccess(), this, this.getOwner()), this, this.getExplosionDamageValue(), this.getExplosionRadiusValue());
             }
 
             this.discard();
         }
 
-        this.destroyBlock();
+        if (!this.level().isClientSide) {
+            BlockHitResult $$hit = this.level().clip(new ClipContext(
+                this.position(),
+                this.position().add(this.getDeltaMovement().scale(2)),
+                ClipContext.Block.COLLIDER,
+                ClipContext.Fluid.NONE,
+                this
+            ));
+            if ($$hit.getType() != BlockHitResult.Type.MISS) {
+                this.destroyBlock($$hit);
+            }
+        }
     }
 
     public double getDefaultGravity() {
