@@ -15,7 +15,7 @@ public class F14Model extends VehicleModel<F14Entity> {
         TransformContext var1000;
         switch (boneName){
             case "LGear", "Rgear", "FGear":
-                var1000 = (bone, vehicle, state) -> bone.setRotX(vehicle.getGearRot() * ((float)Math.PI / 180F));
+                var1000 = (bone, vehicle, state) -> bone.setRotX(vehicle.gearRot(state.getPartialTick()) * ((float)Math.PI / 180F));
                 break;
             case "LFlap":
                 var1000 = (bone, vehicle, state) -> bone.setRotX(Mth.lerp(state.getPartialTick(), vehicle.getFlap2LRotO(), vehicle.getFlap2LRot()) * ((float)Math.PI / 180F));

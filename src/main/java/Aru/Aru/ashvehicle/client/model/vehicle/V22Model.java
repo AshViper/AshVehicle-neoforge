@@ -15,19 +15,19 @@ public class V22Model extends VehicleModel<V22Entity> {
         VehicleModel.TransformContext var1000;
         switch (boneName){
             case "RightTyre":
-                var1000 = (bone, vehicle, state) -> bone.setRotZ(vehicle.getGearRot() * ((float)Math.PI / 180F));
+                var1000 = (bone, vehicle, state) -> bone.setRotZ(vehicle.gearRot(state.getPartialTick()) * ((float)Math.PI / 180F));
                 break;
             case "LeftTyre":
-                var1000 = (bone, vehicle, state) -> bone.setRotZ(vehicle.getGearRot() * (-(float)Math.PI / 180F));
+                var1000 = (bone, vehicle, state) -> bone.setRotZ(vehicle.gearRot(state.getPartialTick()) * (-(float)Math.PI / 180F));
                 break;
             case "LeftTyreHatch", "LeftForwardTyreHatch":
-                var1000 = (bone, vehicle, state) -> bone.setRotZ(vehicle.getGearRot() * (-(float)Math.PI / 180F) + 1.5f);
+                var1000 = (bone, vehicle, state) -> bone.setRotZ(vehicle.gearRot(state.getPartialTick()) * (-(float)Math.PI / 180F) + 1.5f);
                 break;
             case "RightTyreHatch", "RightForwardTyreHatch":
-                var1000 = (bone, vehicle, state) -> bone.setRotZ(vehicle.getGearRot() * ((float)Math.PI / 180F) - 1.5f);
+                var1000 = (bone, vehicle, state) -> bone.setRotZ(vehicle.gearRot(state.getPartialTick()) * ((float)Math.PI / 180F) - 1.5f);
                 break;
             case "Tyre":
-                var1000 = (bone, vehicle, state) -> bone.setRotX(vehicle.getGearRot() * ((float)Math.PI / 180F));
+                var1000 = (bone, vehicle, state) -> bone.setRotX(vehicle.gearRot(state.getPartialTick()) * ((float)Math.PI / 180F));
                 break;
             case "LeftFlap":
                 var1000 = (bone, vehicle, state) -> bone.setRotX(Mth.lerp(state.getPartialTick(), vehicle.getFlap2LRotO(), vehicle.getFlap2LRot()) * ((float)Math.PI / 180F));

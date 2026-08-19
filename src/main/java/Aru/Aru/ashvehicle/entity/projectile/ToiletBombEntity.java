@@ -46,7 +46,7 @@ public class ToiletBombEntity extends DestroyableProjectile implements GeoEntity
     public void onHitBlock(@NotNull BlockHitResult blockHitResult) {
         super.onHitBlock(blockHitResult);
         if (this.level() instanceof ServerLevel) {
-            ProjectileTool.causeCustomExplode(this, this.getExplosionDamageValue() * 1.2F, this.getExplosionRadiusValue());
+            ProjectileTool.causeCustomExplode(this, this.getExplosionDamageValue(), this.getExplosionRadiusValue(), 1.2F);
         }
 
         this.discard();
@@ -56,7 +56,7 @@ public class ToiletBombEntity extends DestroyableProjectile implements GeoEntity
         super.tick();
         if (this.tickCount > 600 || (Float)this.entityData.get(HEALTH) <= 0.0F) {
             if (!this.level().isClientSide) {
-                ProjectileTool.causeCustomExplode(this, this.getExplosionDamageValue() * 1.2F, this.getExplosionRadiusValue());
+                ProjectileTool.causeCustomExplode(this, this.getExplosionDamageValue(), this.getExplosionRadiusValue(), 1.2F);
             }
 
             this.discard();

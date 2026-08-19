@@ -15,19 +15,19 @@ public class F35AModel extends VehicleModel<F35AEntity> {
         TransformContext var1000;
         switch (boneName){
             case "l_wheels2":
-                var1000 = (bone, vehicle, state) -> bone.setRotZ(vehicle.getGearRot() * (-(float)Math.PI / 180F));
+                var1000 = (bone, vehicle, state) -> bone.setRotZ(vehicle.gearRot(state.getPartialTick()) * (-(float)Math.PI / 180F));
                 break;
             case "r_wheels2":
-                var1000 = (bone, vehicle, state) -> bone.setRotZ(vehicle.getGearRot() * ((float)Math.PI / 180F));
+                var1000 = (bone, vehicle, state) -> bone.setRotZ(vehicle.gearRot(state.getPartialTick()) * ((float)Math.PI / 180F));
                 break;
             case "LGDRearLeft", "gearFL":
-                var1000 = (bone, vehicle, state) -> bone.setRotZ(vehicle.getGearRot() * (-(float)Math.PI / 180F) + 1.5f);
+                var1000 = (bone, vehicle, state) -> bone.setRotZ(vehicle.gearRot(state.getPartialTick()) * (-(float)Math.PI / 180F) + 1.5f);
                 break;
             case "LGDRearRight", "gearFR":
-                var1000 = (bone, vehicle, state) -> bone.setRotZ(vehicle.getGearRot() * ((float)Math.PI / 180F) - 1.5f);
+                var1000 = (bone, vehicle, state) -> bone.setRotZ(vehicle.gearRot(state.getPartialTick()) * ((float)Math.PI / 180F) - 1.5f);
                 break;
             case "fr_wheels":
-                var1000 = (bone, vehicle, state) -> bone.setRotX(vehicle.getGearRot() * ((float)Math.PI / 180F));
+                var1000 = (bone, vehicle, state) -> bone.setRotX(vehicle.gearRot(state.getPartialTick()) * ((float)Math.PI / 180F));
                 break;
             case "LFlap":
                 var1000 = (bone, vehicle, state) -> bone.setRotZ(Mth.lerp(state.getPartialTick(), vehicle.getFlap2LRotO(), vehicle.getFlap2LRot()) * ((float)Math.PI / 180F));
@@ -56,12 +56,12 @@ public class F35AModel extends VehicleModel<F35AEntity> {
 
     @Override
     public ResourceLocation getModelResource(F35AEntity object) {
-        return ResourceLocation.fromNamespaceAndPath("ashvehicle", "geo/f-35a.geo.json");
+        return ResourceLocation.fromNamespaceAndPath("ashvehicle", "geo/f35a.geo.json");
     }
 
     @Override
     public ResourceLocation getTextureResource(F35AEntity object) {
-        return ResourceLocation.fromNamespaceAndPath("ashvehicle", "textures/entity/f-35a.png");
+        return ResourceLocation.fromNamespaceAndPath("ashvehicle", "textures/entity/f35a.png");
     }
 
     @Override

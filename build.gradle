@@ -79,16 +79,6 @@ repositories {
         }
     }
 
-    // Modrinth
-    maven {
-        name = 'Modrinth'
-        url 'https://api.modrinth.com/maven'
-
-        content {
-            includeGroup "maven.modrinth"
-        }
-    }
-
     mavenCentral()
 }
 
@@ -130,10 +120,11 @@ dependencies {
     // =========================
     // Superb Warfare
     //
-    // Modrinth, NeoForge 1.21.1, 0.8.9.1
+    // Project ID : 1218165
+    // File ID    : 8104860
     // =========================
 
-    implementation "maven.modrinth:superb-warfare:oVcZKrfn"
+    implementation "curse.maven:superb-warfare-1218165:8104860"
 }
 
 tasks.withType(ProcessResources).configureEach {

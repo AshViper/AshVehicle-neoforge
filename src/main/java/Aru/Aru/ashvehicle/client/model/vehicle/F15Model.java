@@ -15,13 +15,13 @@ public class F15Model extends VehicleModel<F15Entity> {
         VehicleModel.TransformContext var1000;
         switch (boneName){
             case "Tyre", "LeftTyre", "RightTyre":
-                var1000 = (bone, vehicle, state) -> bone.setRotX(vehicle.getGearRot() * ((float)Math.PI / 180F));
+                var1000 = (bone, vehicle, state) -> bone.setRotX(vehicle.gearRot(state.getPartialTick()) * ((float)Math.PI / 180F));
                 break;
             case "LeftTyreHatch" :
-                var1000 = (bone, vehicle, state) -> bone.setRotZ(vehicle.getGearRot() * (-(float)Math.PI / 180F) + 1.57f);
+                var1000 = (bone, vehicle, state) -> bone.setRotZ(vehicle.gearRot(state.getPartialTick()) * (-(float)Math.PI / 180F) + 1.57f);
                 break;
             case "RightTyreHatch" :
-                var1000 = (bone, vehicle, state) -> bone.setRotZ(vehicle.getGearRot() * ((float)Math.PI / 180F) - 1.57f);
+                var1000 = (bone, vehicle, state) -> bone.setRotZ(vehicle.gearRot(state.getPartialTick()) * ((float)Math.PI / 180F) - 1.57f);
                 break;
             case "LeftFlap":
                 var1000 = (bone, vehicle, state) -> bone.setRotX(Mth.lerp(state.getPartialTick(), vehicle.getFlap2LRotO(), vehicle.getFlap2LRot()) * ((float)Math.PI / 180F));
