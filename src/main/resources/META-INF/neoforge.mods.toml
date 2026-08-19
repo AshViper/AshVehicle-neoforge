@@ -27,7 +27,7 @@ side = "BOTH"
 [[dependencies."${mod_id}"]]
 modId = "superbwarfare"
 mandatory = true
-versionRange = "[0.8.0,)"
+versionRange = "[0.8.9.1,)"
 ordering = "NONE"
 side = "BOTH"
 
