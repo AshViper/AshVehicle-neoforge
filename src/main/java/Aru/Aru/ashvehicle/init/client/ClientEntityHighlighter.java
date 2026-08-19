@@ -109,6 +109,7 @@ public class ClientEntityHighlighter {
         if (stealthTypes == null) {
             stealthTypes = Set.of(
                     Aru.Aru.ashvehicle.init.ModEntities.F_35A.get(),
+                    Aru.Aru.ashvehicle.init.ModEntities.F_35B.get(),
                     Aru.Aru.ashvehicle.init.ModEntities.B_2.get(),
                     Aru.Aru.ashvehicle.init.ModEntities.F_22.get(),
                     Aru.Aru.ashvehicle.init.ModEntities.F_117.get(),

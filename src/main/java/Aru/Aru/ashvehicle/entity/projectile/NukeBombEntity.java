@@ -59,7 +59,7 @@ public class NukeBombEntity extends DestroyableProjectile implements GeoEntity {
     }
 
     @Override
-    protected void onHitBlock(@NotNull BlockHitResult hit) {
+    public void onHitBlock(@NotNull BlockHitResult hit) {
         super.onHitBlock(hit);
         if (this.level() instanceof ServerLevel serverLevel) {
             causeNuclearExplosion(serverLevel);
@@ -88,10 +88,9 @@ public class NukeBombEntity extends DestroyableProjectile implements GeoEntity {
         // Damage explosion - NO DEFAULT PARTICLES (we use our own)
         new CustomExplosion.Builder(this)
                 .damageSource(ModDamageTypes.causeCustomExplosionDamage(serverLevel.registryAccess(), this, this.getOwner()))
-                .damage(500)
+                .damage(1000)
                 .radius(100)
                 .position(pos)
-                .damageMultiplier(2.0F)
                 .withParticleType(null) // Disable default SBW particles
                 .keepBlock() // Don't destroy blocks here, we do it ourselves
                 .explode();

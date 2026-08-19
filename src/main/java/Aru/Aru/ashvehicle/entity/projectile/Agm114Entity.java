@@ -45,7 +45,7 @@ public class Agm114Entity extends MissileProjectile implements GeoEntity {
         this.setDamageValue(1100.0F);
         this.setExplosionDamageValue(180.0F);
         this.setExplosionRadiusValue(12.0F);
-        this.distracted = false;
+        this.setDistracted(false);
         this.setDurability(25);
     }
 
@@ -53,7 +53,7 @@ public class Agm114Entity extends MissileProjectile implements GeoEntity {
         return (Item)ModItems.LARGE_ANTI_GROUND_MISSILE.get();
     }
 
-    protected void onHitEntity(@NotNull EntityHitResult result) {
+    public void onHitEntity(@NotNull EntityHitResult result) {
         super.onHitEntity(result);
         Entity entity = result.getEntity();
         if (entity != this.getOwner() && (this.getOwner() == null || entity != this.getOwner().getVehicle())) {
@@ -116,9 +116,9 @@ public class Agm114Entity extends MissileProjectile implements GeoEntity {
         Entity entity = EntityFindUtil.findEntity(this.level(), (String)this.entityData.get(TARGET_UUID));
 
         for(Entity e : SeekTool.seekLivingEntities(this, (double)32.0F, (double)90.0F)) {
-            if (e.getType().is(ModTags.EntityTypes.DECOY) && !this.distracted) {
+            if (e.getType().is(ModTags.EntityTypes.DECOY) && !this.isDistracted()) {
                 this.entityData.set(TARGET_UUID, e.getStringUUID());
-                this.distracted = true;
+                this.setDistracted(true);
                 break;
             }
         }
@@ -131,13 +131,13 @@ public class Agm114Entity extends MissileProjectile implements GeoEntity {
             Vec3 targetPos = new Vec3(entity.getX(), entity.getY() + (double)(0.5F * entity.getBbHeight()) + (double)(entity instanceof EnderDragon ? -3 : 0), entity.getZ());
             Vec3 toVec = RangeTool.calculateFiringSolution(this.position(), targetPos, entity.getDeltaMovement(), this.getDeltaMovement().length(), (double)0.0F);
             if (this.tickCount > 1) {
-                this.lostTarget = VectorTool.calculateAngle(this.getDeltaMovement(), toVec) > (double)120.0F && !this.lostTarget;
-                if (!this.lostTarget) {
+                this.setLostTarget(VectorTool.calculateAngle(this.getDeltaMovement(), toVec) > (double)120.0F && !this.isLostTarget());
+                if (!this.isLostTarget()) {
                     this.turn(toVec, Mth.clamp((float)(this.tickCount - 1) * 0.5F, 0.0F, 15.0F));
                     this.setDeltaMovement(this.getDeltaMovement().scale(0.05).add(this.getLookAngle().scale((double)8.0F)));
                 }
 
-                if (this.lostTarget) {
+                if (this.isLostTarget()) {
                     this.entityData.set(TARGET_UUID, "none");
                 }
             }

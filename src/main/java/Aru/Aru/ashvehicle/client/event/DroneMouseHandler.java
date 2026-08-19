@@ -35,7 +35,7 @@ public class DroneMouseHandler {
         if (player == null) return;
 
         posO = posN;
-        posN = MouseMovementHandler.INSTANCE.getMousePos();
+        posN = MouseMovementHandler.getMousePos();
 
         RemoteDroneEntity drone = DroneControlHandler.getControlledDrone(player);
         if (drone == null) return;

@@ -2,12 +2,12 @@ package Aru.Aru.ashvehicle.client.model;
 
 import Aru.Aru.ashvehicle.AshVehicle;
 import com.atsuishio.superbwarfare.Mod;
-import com.atsuishio.superbwarfare.client.RenderHelper;
 import com.atsuishio.superbwarfare.entity.vehicle.base.VehicleEntity;
 import com.atsuishio.superbwarfare.event.ClientEventHandler;
 import com.atsuishio.superbwarfare.resource.ModelResource;
 import com.atsuishio.superbwarfare.resource.vehicle.DefaultVehicleResource;
 import com.atsuishio.superbwarfare.resource.vehicle.VehicleResource;
+import com.atsuishio.superbwarfare.tools.RenderDistanceHelper;
 import com.atsuishio.superbwarfare.tools.ResourceOnceLogger;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
@@ -58,7 +58,7 @@ public class VehicleModel<T extends VehicleEntity & GeoAnimatable> extends GeoMo
     }
 
     public ResourceLocation getModelResource(T vehicle) {
-        if (RenderHelper.isInGui()) {
+        if (RenderDistanceHelper.isInGui()) {
             return getDefault(vehicle).getModel().model;
         } else {
             int lodLevel = this.getLODLevel(vehicle);
@@ -80,7 +80,7 @@ public class VehicleModel<T extends VehicleEntity & GeoAnimatable> extends GeoMo
     }
 
     public ResourceLocation getTextureResource(T vehicle) {
-        if (RenderHelper.isInGui()) {
+        if (RenderDistanceHelper.isInGui()) {
             return getDefault(vehicle).getModel().texture;
         } else {
             int lodLevel = this.getLODLevel(vehicle);
@@ -104,13 +104,13 @@ public class VehicleModel<T extends VehicleEntity & GeoAnimatable> extends GeoMo
     public int getLODLevel(T vehicle) {
         DefaultVehicleResource defaultData = getDefault(vehicle);
         ModelResource model = defaultData.getModel();
-        if (defaultData.lodDistance != null && !defaultData.lodDistance.list.isEmpty() && model.hasLOD()) {
+        if (defaultData.getLodDistance() != null && !defaultData.getLodDistance().list.isEmpty() && model.hasLOD()) {
             LocalPlayer player = Minecraft.getInstance().player;
             if (player != null && !player.isScoping()) {
                 double distance = player.position().distanceTo(vehicle.position());
 
-                for(int i = 0; i < defaultData.lodDistance.list.size(); ++i) {
-                    if (distance <= (Double)defaultData.lodDistance.list.get(i)) {
+                for(int i = 0; i < defaultData.getLodDistance().list.size(); ++i) {
+                    if (distance <= (Double)defaultData.getLodDistance().list.get(i)) {
                         return i;
                     }
                 }

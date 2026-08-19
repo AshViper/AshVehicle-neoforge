@@ -92,6 +92,7 @@ public final class ModEntities {
     public static final DeferredHolder<EntityType<?>, EntityType<M3A3BradleyEntity>> M3A3_BRADLEY = ifv("m3a3-bradley", M3A3BradleyEntity::new);
     public static final DeferredHolder<EntityType<?>, EntityType<F39EEntity>> F_39E = aircraft("f-39e", F39EEntity::new);
     public static final DeferredHolder<EntityType<?>, EntityType<F35AEntity>> F_35A = aircraft("f-35a", F35AEntity::new);
+    public static final DeferredHolder<EntityType<?>, EntityType<F35Entity>> F_35B = aircraft("f-35b", F35Entity::new);
     public static final DeferredHolder<EntityType<?>, EntityType<B2Entity>> B_2 = aircraft("b-2", B2Entity::new);
     public static final DeferredHolder<EntityType<?>, EntityType<F22Entity>> F_22 = aircraft("f-22", F22Entity::new);
     public static final DeferredHolder<EntityType<?>, EntityType<SapsanEntity>> SAPSAN_GRIM2 = tank("sapsan-grim2", SapsanEntity::new);

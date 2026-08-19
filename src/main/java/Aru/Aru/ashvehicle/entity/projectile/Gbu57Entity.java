@@ -48,7 +48,7 @@ public class Gbu57Entity extends DestroyableProjectile implements GeoEntity {
         return (Item)ModItems.MEDIUM_AERIAL_BOMB.get();
     }
 
-    protected void onHitBlock(@NotNull BlockHitResult hit) {
+    public void onHitBlock(@NotNull BlockHitResult hit) {
         super.onHitBlock(hit);
 
         if (this.level().isClientSide) return;
@@ -66,9 +66,8 @@ public class Gbu57Entity extends DestroyableProjectile implements GeoEntity {
             if (this.tickCount > 600) {
                 ProjectileTool.causeCustomExplode(
                         this,
-                        this.getExplosionDamageValue(),
-                        this.getExplosionRadiusValue(),
-                        1.2F
+                        this.getExplosionDamageValue() * 1.2F,
+                        this.getExplosionRadiusValue()
                 );
                 this.discard();
             }
@@ -108,9 +107,8 @@ public class Gbu57Entity extends DestroyableProjectile implements GeoEntity {
 
         ProjectileTool.causeCustomExplode(
                 this,
-                this.getExplosionDamageValue() * 2.0F,
-                this.getExplosionRadiusValue() * 1.5F,
-                1.2F
+                this.getExplosionDamageValue() * 2.0F * 1.2F,
+                this.getExplosionRadiusValue() * 1.5F
         );
 
         this.discard();
@@ -119,9 +117,8 @@ public class Gbu57Entity extends DestroyableProjectile implements GeoEntity {
     private void explodeAndDiscard() {
         ProjectileTool.causeCustomExplode(
                 this,
-                this.getExplosionDamageValue() * 2.0F,
-                this.getExplosionRadiusValue() * 1.5F,
-                1.2F
+                this.getExplosionDamageValue() * 2.0F * 1.2F,
+                this.getExplosionRadiusValue() * 1.5F
         );
         this.discard();
     }
