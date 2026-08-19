@@ -1,17 +1,17 @@
 package Aru.Aru.ashvehicle.client.model.vehicle;
 
 import Aru.Aru.ashvehicle.client.model.VehicleModel;
-import Aru.Aru.ashvehicle.entity.vehicle.F35AEntity;
+import Aru.Aru.ashvehicle.entity.vehicle.F35Entity;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import org.jetbrains.annotations.Nullable;
 
-public class F35AModel extends VehicleModel<F35AEntity> {
-    public F35AModel() {
+public class F35Model extends VehicleModel<F35Entity> {
+    public F35Model() {
     }
 
     @Nullable
-    public VehicleModel.TransformContext<F35AEntity> collectTransform(String boneName) {
+    public VehicleModel.TransformContext<F35Entity> collectTransform(String boneName) {
         TransformContext var1000;
         switch (boneName){
             case "l_wheels2":
@@ -55,17 +55,17 @@ public class F35AModel extends VehicleModel<F35AEntity> {
     }
 
     @Override
-    public ResourceLocation getModelResource(F35AEntity object) {
-        return ResourceLocation.fromNamespaceAndPath("ashvehicle", "geo/f-35a.geo.json");
+    public ResourceLocation getModelResource(F35Entity object) {
+        return ResourceLocation.fromNamespaceAndPath("ashvehicle", "geo/f-35b.geo.json");
     }
 
     @Override
-    public ResourceLocation getTextureResource(F35AEntity object) {
-        return ResourceLocation.fromNamespaceAndPath("ashvehicle", "textures/entity/f-35a.png");
+    public ResourceLocation getTextureResource(F35Entity object) {
+        return ResourceLocation.fromNamespaceAndPath("ashvehicle", "textures/entity/f-35b.png");
     }
 
     @Override
-    public ResourceLocation getAnimationResource(F35AEntity animatable) {
+    public ResourceLocation getAnimationResource(F35Entity animatable) {
         return ResourceLocation.fromNamespaceAndPath("ashvehicle", "animations/f-35.animation.json");
     }
 }

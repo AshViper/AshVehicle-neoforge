@@ -15,16 +15,16 @@ public class F4Model extends VehicleModel<F4Entity> {
         VehicleModel.TransformContext var1000;
         switch (boneName){
             case "Lgear":
-                var1000 = (bone, vehicle, state) -> bone.setRotZ(vehicle.gearRot(state.getPartialTick()) * ((float)Math.PI / 180F));
+                var1000 = (bone, vehicle, state) -> bone.setRotZ(vehicle.getGearRot() * ((float)Math.PI / 180F));
                 break;
             case "Rgear":
-                var1000 = (bone, vehicle, state) -> bone.setRotZ(vehicle.gearRot(state.getPartialTick()) * (-(float)Math.PI / 180F));
+                var1000 = (bone, vehicle, state) -> bone.setRotZ(vehicle.getGearRot() * (-(float)Math.PI / 180F));
                 break;
             case "bone5":
-                var1000 = (bone, vehicle, state) -> bone.setRotZ(vehicle.gearRot(state.getPartialTick()) * ((float)Math.PI / 180F) - 1.5f);
+                var1000 = (bone, vehicle, state) -> bone.setRotZ(vehicle.getGearRot() * ((float)Math.PI / 180F) - 1.5f);
                 break;
             case "gear":
-                var1000 = (bone, vehicle, state) -> bone.setRotX(vehicle.gearRot(state.getPartialTick()) * (-(float)Math.PI / 180F));
+                var1000 = (bone, vehicle, state) -> bone.setRotX(vehicle.getGearRot() * (-(float)Math.PI / 180F));
                 break;
             case "LFlap":
                 var1000 = (bone, vehicle, state) -> bone.setRotX(Mth.lerp(state.getPartialTick(), vehicle.getFlap2LRotO(), vehicle.getFlap2LRot()) * ((float)Math.PI / 180F));

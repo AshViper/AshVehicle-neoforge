@@ -30,7 +30,7 @@ public class Rah66Renderer extends VehicleRenderer<Rah66Entity> {
         float bayRot = Mth.lerp(partialTick, animatable.weaponBayRotO, animatable.getWeaponBayRot());
         float bayRotRad = bayRot * ((float) Math.PI / 180F);
 
-        float gearRot = Mth.lerp(partialTick, animatable.gearRot(1f), animatable.getGearRot());
+        float gearRot = animatable.getGearRot();
         float gearRotRad = gearRot * ((float) Math.PI / 140F);
         float gearRotRad2 = (gearRot - 85f) * ((float)Math.PI / 180f);
 

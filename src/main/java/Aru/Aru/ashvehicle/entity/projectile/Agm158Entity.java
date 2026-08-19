@@ -42,7 +42,7 @@ public class Agm158Entity extends MissileProjectile implements GeoEntity {
     private enum Phase { DROP, CRUISE, HOMING }
     private Phase phase = Phase.DROP;
 
-    private int dropTicks = 20; // 0.5Р·В§вЂ™
+    private int dropTicks = 20; // 0.5Р В·Р’В§РІР‚в„ў
 
     public Agm158Entity(EntityType<? extends Agm158Entity> type, Level level) {
         super(type, level);
@@ -50,7 +50,7 @@ public class Agm158Entity extends MissileProjectile implements GeoEntity {
         this.setDamageValue(1100.0F);
         this.setExplosionDamageValue(180.0F);
         this.setExplosionRadiusValue(12.0F);
-        this.distracted = false;
+        this.setDistracted(false);
         this.setDurability(25);
     }
 
@@ -58,7 +58,7 @@ public class Agm158Entity extends MissileProjectile implements GeoEntity {
         return (Item)ModItems.LARGE_ANTI_GROUND_MISSILE.get();
     }
 
-    protected void onHitEntity(@NotNull EntityHitResult result) {
+    public void onHitEntity(@NotNull EntityHitResult result) {
         super.onHitEntity(result);
         Entity entity = result.getEntity();
         if (entity != this.getOwner() && (this.getOwner() == null || entity != this.getOwner().getVehicle())) {
@@ -120,17 +120,17 @@ public class Agm158Entity extends MissileProjectile implements GeoEntity {
         this.mediumTrail();
         Entity entity = EntityFindUtil.findEntity(this.level(), (String)this.entityData.get(TARGET_UUID));
 
-        // РіС“вЂЎРівЂљС–РівЂљВ¤РµвЂЎВ¦Р·С’вЂ РїСв‚¬РµвЂ¦С“РівЂљС–РіС“СРіС“вЂ°РіРѓСњРіРѓВ®РіРѓС•РіРѓС•РїСвЂ°
+        // Р С–РЎвЂњРІР‚РЋР С–РІР‚С™РЎвЂ“Р С–РІР‚С™Р’В¤Р ВµРІР‚РЋР’В¦Р В·РЎвЂ™РІР‚В Р С—РЎВРІвЂљВ¬Р ВµРІР‚В¦РЎвЂњР С–РІР‚С™РЎвЂ“Р С–РЎвЂњРЎВР С–РЎвЂњРІР‚В°Р С–Р С“РЎСљР С–Р С“Р’В®Р С–Р С“РЎвЂўР С–Р С“РЎвЂўР С—РЎВРІР‚В°
         for(Entity e : SeekTool.seekLivingEntities(this, 32.0F, 90.0F)) {
-            if (e.getType().is(ModTags.EntityTypes.DECOY) && !this.distracted) {
+            if (e.getType().is(ModTags.EntityTypes.DECOY) && !this.isDistracted()) {
                 this.entityData.set(TARGET_UUID, e.getStringUUID());
-                this.distracted = true;
+                this.setDistracted(true);
                 break;
             }
         }
 
         //===========================
-        //     РІвЂ”вЂ  РіС“вЂўРівЂљВ§РіС“СРівЂљС”Рµв‚¬В¶РµС•РЋ РІвЂ”вЂ 
+        //     Р Р†РІР‚вЂќРІР‚В  Р С–РЎвЂњРІР‚СћР С–РІР‚С™Р’В§Р С–РЎвЂњРЎВР С–РІР‚С™РЎвЂќР ВµРІвЂљВ¬Р’В¶Р ВµРЎвЂўР Р‹ Р Р†РІР‚вЂќРІР‚В 
         //===========================
         if (entity != null && !this.entityData.get(TARGET_UUID).equals("none")) {
 
@@ -139,10 +139,10 @@ public class Agm158Entity extends MissileProjectile implements GeoEntity {
             switch (phase) {
 
                 // ----------------------------------
-                // РІвЂВ  0.5Р·В§вЂ™РіРѓВ РіРѓвЂРёС’Р…РґС‘вЂ№
+                // Р Р†РІР‚ВР’В  0.5Р В·Р’В§РІР‚в„ўР С–Р С“Р’В Р С–Р С“РІР‚ВР С‘РЎвЂ™Р вЂ¦Р Т‘РЎвЂРІР‚в„–
                 // ----------------------------------
                 case DROP -> {
-                    this.setDeltaMovement(0, -1.1, 0); // РёС’Р…РґС‘вЂ№Р№Р‚СџРµС”В¦
+                    this.setDeltaMovement(0, -1.1, 0); // Р С‘РЎвЂ™Р вЂ¦Р Т‘РЎвЂРІР‚в„–Р в„–Р вЂљРЎСџР ВµРЎвЂќР’В¦
 
                     dropTicks--;
                     if (dropTicks <= 0) {
@@ -151,34 +151,34 @@ public class Agm158Entity extends MissileProjectile implements GeoEntity {
                 }
 
                 // ----------------------------------
-                // РІвЂРЋ Р¶В°Т‘Рµв„–С–РµВ·РЋРёв‚¬Р„
+                // Р Р†РІР‚ВР Р‹ Р В¶Р’В°РўвЂР ВµРІвЂћвЂ“РЎвЂ“Р ВµР’В·Р Р‹Р С‘РІвЂљВ¬Р вЂћ
                 // ----------------------------------
                 case CRUISE -> {
 
-                    // 50mРґВ»ТђРµвЂ вЂ¦РіРѓР„РівЂљвЂ°РёР„ВРµВ°Р‹РіС“вЂўРівЂљВ§РіС“СРівЂљС”РіРѓС‘
+                    // 50mР Т‘Р’В»РўС’Р ВµРІР‚В РІР‚В¦Р С–Р С“Р вЂћР С–РІР‚С™РІР‚В°Р С‘Р вЂћР’ВР ВµР’В°Р вЂ№Р С–РЎвЂњРІР‚СћР С–РІР‚С™Р’В§Р С–РЎвЂњРЎВР С–РІР‚С™РЎвЂќР С–Р С“РЎвЂ
                     if (dist < 200) {
                         phase = Phase.HOMING;
                         break;
                     }
 
-                    // РівЂљС—РіС“СРівЂљР†РіС“С“РіС“в‚¬Р¶вЂ“в„–РµС’вЂРіРѓС‘Р¶В°Т‘Рµв„–С–Р·В§В»РµвЂ№вЂўРїСв‚¬Р№В«ВРµС”В¦РµвЂєС”РµВ®С™РїСвЂ°
+                    // Р С–РІР‚С™РЎвЂ”Р С–РЎвЂњРЎВР С–РІР‚С™Р вЂ Р С–РЎвЂњРЎвЂњР С–РЎвЂњРІвЂљВ¬Р В¶РІР‚вЂњРІвЂћвЂ“Р ВµРЎвЂ™РІР‚ВР С–Р С“РЎвЂР В¶Р’В°РўвЂР ВµРІвЂћвЂ“РЎвЂ“Р В·Р’В§Р’В»Р ВµРІР‚в„–РІР‚СћР С—РЎВРІвЂљВ¬Р в„–Р’В«Р’ВР ВµРЎвЂќР’В¦Р ВµРІР‚С”РЎвЂќР ВµР’В®РЎв„ўР С—РЎВРІР‚В°
                     Vec3 horizontalTarget = new Vec3(
                             entity.getX(),
-                            this.getY(),     // Р№В«ВРµС”В¦РµвЂєС”РµВ®С™РїССњР¶В°Т‘Рµв„–С–Р№Р€вЂєРёРЋРЉ
+                            this.getY(),     // Р в„–Р’В«Р’ВР ВµРЎвЂќР’В¦Р ВµРІР‚С”РЎвЂќР ВµР’В®РЎв„ўР С—РЎВРЎСљР В¶Р’В°РўвЂР ВµРІвЂћвЂ“РЎвЂ“Р в„–Р в‚¬РІР‚С”Р С‘Р Р‹Р Р‰
                             entity.getZ()
                     );
 
                     Vec3 toVec = horizontalTarget.subtract(this.position()).normalize();
 
-                    this.turn(toVec, 6.0F);             // Р·В·В©РівЂљвЂћРіРѓвЂ№РіРѓР„Р¶вЂ”вЂ№РµвЂєС›
+                    this.turn(toVec, 6.0F);             // Р В·Р’В·Р’В©Р С–РІР‚С™РІР‚С›Р С–Р С“РІР‚в„–Р С–Р С“Р вЂћР В¶РІР‚вЂќРІР‚в„–Р ВµРІР‚С”РЎвЂє
                     this.setDeltaMovement(
                             this.getDeltaMovement().scale(0.05)
                                     .add(this.getLookAngle().scale(8.0F))
-                    ); // РµВ·РЋРёв‚¬Р„Р№Р‚СџРµС”В¦
+                    ); // Р ВµР’В·Р Р‹Р С‘РІвЂљВ¬Р вЂћР в„–Р вЂљРЎСџР ВµРЎвЂќР’В¦
                 }
 
                 // ----------------------------------
-                // РІвЂСћ РµвЂ¦С“РіРѓВ®РёР„ВРµВ°Р‹Р¶вЂ“в„–РµСРЏРїСв‚¬HOMINGРїСвЂ°
+                // Р Р†РІР‚ВРЎС› Р ВµРІР‚В¦РЎвЂњР С–Р С“Р’В®Р С‘Р вЂћР’ВР ВµР’В°Р вЂ№Р В¶РІР‚вЂњРІвЂћвЂ“Р ВµРЎВР РЏР С—РЎВРІвЂљВ¬HOMINGР С—РЎВРІР‚В°
                 // ----------------------------------
                 case HOMING -> {
 
@@ -204,10 +204,9 @@ public class Agm158Entity extends MissileProjectile implements GeoEntity {
                     );
 
                     if (this.tickCount > 1) {
-                        this.lostTarget =
-                                VectorTool.calculateAngle(this.getDeltaMovement(), toVec) > 120.0 && !this.lostTarget;
+                        this.setLostTarget(VectorTool.calculateAngle(this.getDeltaMovement(), toVec) > 120.0 && !this.isLostTarget());
 
-                        if (!this.lostTarget) {
+                        if (!this.isLostTarget()) {
                             this.turn(toVec, Mth.clamp((float)(this.tickCount - 1) * 0.5F, 0.0F, 15.0F));
                             this.setDeltaMovement(
                                     this.getDeltaMovement().scale(0.05)
@@ -215,7 +214,7 @@ public class Agm158Entity extends MissileProjectile implements GeoEntity {
                             );
                         }
 
-                        if (this.lostTarget) {
+                        if (this.isLostTarget()) {
                             this.entityData.set(TARGET_UUID, "none");
                         }
                     }
@@ -223,7 +222,7 @@ public class Agm158Entity extends MissileProjectile implements GeoEntity {
             }
         }
 
-        // РµвЂ¦С“РіРѓВ®РµР‡С—РµвЂР…РіС“В»Р¶В°Т‘Р¶Р†РЋРµвЂЎВ¦Р·С’вЂ 
+        // Р ВµРІР‚В¦РЎвЂњР С–Р С“Р’В®Р ВµР вЂЎРЎвЂ”Р ВµРІР‚ВР вЂ¦Р С–РЎвЂњР’В»Р В¶Р’В°РўвЂР В¶Р вЂ Р Р‹Р ВµРІР‚РЋР’В¦Р В·РЎвЂ™РІР‚В 
         if (this.tickCount > 200 || this.isInWater()) {
             if (this.level() instanceof ServerLevel) {
                 ProjectileTool.causeCustomExplode(
